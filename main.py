@@ -8,7 +8,7 @@ time.sleep(3)
 
 model = "canny"
 show = False
-image_path = "image copy.png"
+image_path = "image.png"
 image = cv2.imread(image_path, cv2.IMREAD_COLOR)
 gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 blurred_image = cv2.GaussianBlur(gray_image, (5, 5), 1.4)
