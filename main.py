@@ -9,6 +9,10 @@ time.sleep(3)
 model = "canny"
 show = False
 image_path = "image.png"
+scale_factor = 1 # Output will be the exact same as the screenshot so keep that in mind!
+offset_x = 150
+offset_y = 150
+
 image = cv2.imread(image_path, cv2.IMREAD_COLOR)
 gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 blurred_image = cv2.GaussianBlur(gray_image, (5, 5), 1.4)
@@ -40,9 +44,7 @@ def display(image):
     plt.show()
 
 def draw(edges):
-    scale_factor = 1 # Output will be the exact same as the screenshot so keep that in mind!
-    offset_x = 720
-    offset_y = 280
+    global scale_factor, offset_x, offset_y
 
     points = np.column_stack(np.where(edges > 0))
 
@@ -59,19 +61,22 @@ def draw(edges):
     elapsed_time = end_time - start_time
     print(f"The process took {elapsed_time:.4f} seconds to complete.")
 
-if model == "canny":
-    edges = canny(blurred_image)
-    if show == False:
-        draw(edges)
+def main():
+    if model == "canny":
+        edges = canny(blurred_image)
+        if show == False:
+            draw(edges)
+        else:
+            display(edges)
+    elif model == "sobel":
+        edges = sobel(blurred_image)
+        if show == False:
+            draw(edges)
+        else:
+            display(edges)
     else:
-        display(edges)
-elif model == "sobel":
-    edges = sobel(blurred_image)
-    if show == False:
-        draw(edges)
-    else:
-        display(edges)
-else:
-    print("model does not exist, terminating program")
-    exit()
+        print("model does not exist, terminating program")
+        exit()
+
+main()
     
