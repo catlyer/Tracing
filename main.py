@@ -3,12 +3,10 @@ import numpy as np
 import pyautogui
 import time
 import matplotlib.pyplot as plt
+from config import model, show, image_path
 
 #time.sleep(3)
 
-model = "canny"
-show = True
-image_path = "image.png"
 scale_factor = 1 # Output will be the exact same as the screenshot so keep that in mind!
 offset_x = 150
 offset_y = 150
